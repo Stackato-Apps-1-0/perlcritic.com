@@ -1,0 +1,21 @@
+applications:
+  .:
+    name: perlcritic
+    stackato:
+      processes:
+        web: plackup --port $PORT
+      env:
+        TMP: /tmp
+      cron:
+      - 0 * * * * find $TMP -name *.html -mmin +60 -delete
+      requirements:
+        ppm:
+        - CGI::Compile
+        - CGI::Emulate::PSGI
+        - PPIx::Regexp
+        - Perl::Tidy
+        - Plack
+        - Pod::Spell
+        - String::Format
+        - Syntax::Highlight::Perl::Improved
+        - 'Template::'
